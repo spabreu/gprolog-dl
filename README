@@ -1,0 +1,7 @@
+Usage:
+	gplc -o dl dl.c dl-pl.pl  -L -rdynamic -L -ldl
+
+Compile units to be loaded with:
+	( for S in Object_Initializer System_Directives User_Directives; do
+	    echo .globl $S; done;
+          cat foo.s ) | as -o foo.o && ld -shared -o foo.so foo.o
