@@ -1,0 +1,5 @@
+gprolog-dl (1.0-1) unstable; urgency=low
+
+  * initial packaging.
+
+ -- Salvador Abreu <spa@debian.org>  Wed, 24 May 2006 21:56:16 +0000

@@ -16,7 +16,7 @@ endif
 	  echo .globl $(FPFX)User_Directives;		\
 	  $(GPLC) -S -o $(STDOUT) $< ) |		\
 	as -o $@.o;					\
-	ld $(SHARED) -o $@ $@.o;				\
+	ld $(SHARED) -o $@ $@.o;			\
 	rm $@.o
 
 %.o: %.pl

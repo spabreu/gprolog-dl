@@ -1,0 +1,77 @@
+#! /usr/bin/make -f
+# =============================================================================
+# debian/rules for the GNU Prolog PostgreSQL interface package.
+#
+# Written by Salvador Abreu <spa@debian.org>
+
+# This is the debhelper compatibility version to use.
+export DH_COMPAT=3
+
+VARIANT=-cx
+package=gprolog-dl$(VARIANT)
+ROOT=${PWD}/debian/${package}
+INSTDIR=/usr/lib/gprolog$(VARIANT)/ext/dl
+
+# == build binaries and documentation =========================================
+
+build: build-stamp
+build-stamp:
+	dh_testdir
+# -- commands to configure and build the package ------------------------------
+	make dl
+# -----------------------------------------------------------------------------
+	touch build-stamp
+
+
+# == clean up everything ======================================================
+
+clean:
+	dh_testdir
+	dh_testroot
+	rm -f build-stamp
+# -- commands to clean up after the build process -----------------------------
+	make clean
+# -----------------------------------------------------------------------------
+	dh_clean
+
+
+# == installation =============================================================
+
+install: build
+	dh_testdir
+	dh_testroot
+	dh_clean -k
+	dh_installdirs -A
+# -- commands to install the package into the staging area --------------------
+	mkdir -p ${ROOT}/usr/bin
+	mkdir -p ${ROOT}${INSTDIR}
+	install -c -m 444 dl.o ${ROOT}${INSTDIR}/module.o
+	install -c -m 444 dl-interface.o ${ROOT}${INSTDIR}/interface.o
+	install -c -m 444 dl-pl.pl ${ROOT}${INSTDIR}/defs.pl
+	install -c -m 555 gplc-dl.sh ${ROOT}/usr/bin/gplc-dl
+	dh_undocumented ${package}.1
+# -----------------------------------------------------------------------------
+#	dh_movefiles
+
+
+# == build package ============================================================
+
+binary: build install
+	dh_testdir
+	dh_testroot
+	dh_installdocs
+	dh_installexamples
+	dh_installmenu
+	dh_installman
+	dh_installinfo
+	dh_link
+	dh_strip
+	dh_compress
+	dh_fixperms
+	dh_installdeb
+	dh_shlibdeps
+	dh_gencontrol
+	dh_md5sums
+	dh_builddeb
+
+.PHONY: build clean binary install

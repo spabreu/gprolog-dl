@@ -1,0 +1,8 @@
+== GNU Prolog for Debian ======================================================
+-- Dynamic loader -------------------------------------------------------------
+
+Provide a Prolog interface to -ldl, for Contextual Logic Programming
+only.
+
+
+Salvador Abreu <spa@debian.org>

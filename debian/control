@@ -1,0 +1,14 @@
+Source: gprolog-dl
+Section: devel
+Priority: optional
+Maintainer: Salvador Abreu <spa@debian.org>
+Standards-Version: 3.6
+Build-Depends: gprolog-cx
+
+Package: gprolog-dl-cx
+Architecture: i386 sparc mips alpha powerpc
+Depends: gprolog-cx, ${shlibs:Depends}
+Conflicts: 
+Description: Dynamic loader for GNU Prolog
+ Provide a Prolog interface to -ldl, for Contextual Logic Programming
+ only.
