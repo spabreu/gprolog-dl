@@ -24,5 +24,8 @@ endif
 
 all:
 
+dl: dl-interface.pl dl-pl.pl dl.c
+	gplc -o $@ $^ -L -rdynamic -L -ldl
+
 clean:
 	rm -f *.so *.o *.s
