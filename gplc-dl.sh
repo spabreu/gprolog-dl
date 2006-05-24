@@ -12,9 +12,6 @@ for F in $PL_FILES; do
     ( echo .globl Object_Initializer
       echo .globl System_Directives
       echo .globl User_Directives
-      gplc -S -o /dev/stdout $F )
-    gplc-cx -S $F
-    ( for S in Object_Initializer System_Directives User_Directives; do
-            echo .globl $S; done;
-          cat foo.s ) | as -o foo.o && ld -shared -o foo.so foo.o
+      gplc -S -o /dev/stdout $F ) | \
+      as -o ${F%.pl}.o && ld -shared -o ${F%.pl}.so ${F%.pl}.o
 done
