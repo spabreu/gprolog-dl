@@ -1,6 +1,14 @@
 GPLC = gplc
-FPFX = _
-STDOUT = /dev/stdout		# system dependent!
+STDOUT = /dev/stdout
+
+ifeq ($(shell uname),Darwin)
+ FPFX = _
+ SHARED = -dylib
+else
+ FPFX = ""
+ SHARED = -shared
+endif
+
 
 %.so: %.pl
 	( echo .globl $(FPFX)Object_Initializer;	\
@@ -8,7 +16,7 @@ STDOUT = /dev/stdout		# system dependent!
 	  echo .globl $(FPFX)User_Directives;		\
 	  $(GPLC) -S -o $(STDOUT) $< ) |		\
 	as -o $@.o;					\
-	ld -dylib -o $@ $@.o;				\
+	ld $(SHARED) -o $@ $@.o;				\
 	rm $@.o
 
 %.o: %.pl
