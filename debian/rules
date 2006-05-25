@@ -1,6 +1,6 @@
 #! /usr/bin/make -f
 # =============================================================================
-# debian/rules for the GNU Prolog PostgreSQL interface package.
+# debian/rules for the GNU Prolog/CX dynamic loader package.
 #
 # Written by Salvador Abreu <spa@debian.org>
 
@@ -18,7 +18,6 @@ build: build-stamp
 build-stamp:
 	dh_testdir
 # -- commands to configure and build the package ------------------------------
-	gplc -c dl-pl.pl
 	gplc -c dl-interface.pl
 	gplc -c dl.c
 	make dl
@@ -48,9 +47,7 @@ install: build
 # -- commands to install the package into the staging area --------------------
 	mkdir -p ${ROOT}/usr/bin
 	mkdir -p ${ROOT}${INSTDIR}
-	install -c -m 444 dl.o ${ROOT}${INSTDIR}/module.o
-	install -c -m 444 dl-interface.o ${ROOT}${INSTDIR}/interface.o
-	install -c -m 444 dl-pl.pl ${ROOT}${INSTDIR}/defs.pl
+	install -c -m 444 dl-interface.o ${ROOT}${INSTDIR}/module.o
 	install -c -m 555 gplc-dl.sh ${ROOT}/usr/bin/gplc-dl
 	dh_undocumented ${package}.1
 # -----------------------------------------------------------------------------
