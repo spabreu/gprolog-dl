@@ -41,7 +41,7 @@ Bool dl_init (void *handle, int mask) {
   for (f = functions; *f; ++f) {
     if (mask & 1) {
       (void) dlerror ();
-      if (function = (void (*)()) dlsym (handle, *f)) {
+      if ((function = (void (*)()) dlsym (handle, *f))) {
 	// fprintf (stderr, "dl_init/1: calling %s: (0x%08X)\n", *f, function);
 	(*function) ();
       }
