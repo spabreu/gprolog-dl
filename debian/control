@@ -6,7 +6,7 @@ Standards-Version: 3.6
 Build-Depends: gprolog-cx
 
 Package: gprolog-dl-cx
-Architecture: i386 sparc mips alpha powerpc
+Architecture: i386 sparc mips alpha powerpc amd64
 Depends: gprolog-cx, ${shlibs:Depends}
 Conflicts: 
 Description: Dynamic loader for GNU Prolog
